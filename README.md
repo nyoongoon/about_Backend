@@ -1,6 +1,34 @@
 # about_Backend
 백엔드를 공부하며 중요한 것을 기록하는 저장소입니다.
 
+# If else VS Swicth-case
+### If else
+- 조건문 체크 : 값의 범위나 조건(condition)을 체크한다.
+- 이상적인 상황 : Boolean 결과값이 나오는 다양한 조건문들이 있을 때.
+- 점프 테이블 : 점프 테이블을 만들지 않으며 모든 케이스는 런타임에 실행된다.
+- 검색 타입 : 선형 검색
+- 조건문 표현 : 여러 조건문들을 사용 가능
+- 평가 : integer, character, pointer, floating-point, boolean
+- 실행 순서 : if 실행 혹은 else 실행
+- 기본 실행 : if조건문이 거짓이라면 else문의 코드가 실행된다.
+- 값 : values are based on the constraint
+- 사용 : 조건문이 true or false인지 판단하기 위해 사용됨
+- 수정 : 중첩되어 있는 경우 수정하기 어렵다.
+
+### Switch-case
+- 조건문 체크 : single integer, 상수화된 값, 스트링 객체를 테스트
+- 이상적인 상황 : 고정된 데이터 값이 있는 경우
+- 점프 테이블 : 컴파일 시 컴프테이블 생성, 선택된 케이스만 런타임 시 실행됨.
+- 검색 타입 : 이진 검색
+- 조건문 표현 : 하나의 표현만 사용 가능
+- 평가 : character, integer. 
+- 실행 순서 :각 케이스에서 break 문을 만나거나 구문이 끝나야 다음 구문을 실행한다. 
+- 기본 실행 : 모든 케이스를 검사 하고도 맞는 케이스가 없을 때 기본 구문을 실행한다.
+- 값 : values are based on user choice.
+- 사용 : 같은 변수 중 여러 값들을 판단할 때 사용.
+- 사용 : 수정하기 용이하다.
+<br/><br/>
+
 # DTO vs JSON (+직렬화)
 ### DTO (Data Transfer Object)
 - 데이터를 한 번에 전달하기 위해 만든 클래스가 DTO. 
