@@ -15,6 +15,69 @@
 - 사용 : 조건문이 true or false인지 판단하기 위해 사용됨
 - 수정 : 중첩되어 있는 경우 수정하기 어렵다.
 
+# MIME (Multipurpose Internet Mail Extensions)
+- MIME이란? 간략히 파일 변환을 뜻함.
+- 이메일과 함께 동봉할 파일을 텍스트 문자로 전환해서 이메일 시스템을 통해 전달하기 위해 개발되었기 때문에 이름이 Internet Mail Extension. 현재는 웹을 통해서 여러 형태의 파일을 전달하는데 쓰임.
+
+- MIME 이전에는 UUEncode 방식. 
+- 예전에는 텍스트파일을 주고 받는데 ASCII 표준을 따랐음. 하지만 바이너리 파일을 보내느 경우가 생김. 바이너리 파일을 기존의 시스템에서 문제 없이 전달하기 위해 텍스트 파일로 변환이 필요하게 됨. 이러한 텍스트 파일로 변환을 인코딩, 텍스트 파일을 바이너리 파일로 변환하는 과정을 디코딩 이라고 함. 
+- 이러한 과정을 통해 텍스트만 전달할 수 있는 기존의 이메일 시스템에서도 여러 바이너리 파일을 주고 받을 수 있게 됨.
+- MIME으로 인코딩 한 파일은 Content-type 정보를 파일의 앞부분에 담게 된다. 
+
+## MIME 형식
+- 파일의 종류/파일 포맷 (image/gif)
+- 대부분 소문자로 쓰임s
+
+## 개별 타입
+- 특정 서브타입이 없는 텍스트 문서들은 text/plain으로 사용되어야 하고, 특정 서트바입이 없는 이진문서는 application/octetOstream이 사용되어야 함.
+### text : 특정 문자셋으로 구성된 텍스트 정보나 스크립트 같은 formatted text 정보 전송에 사용.
+- subtype ex) : text/plain, text/html, text/css, text/javascript
+### image : 모든 종류의 이미지를 나타내며, 비디오는 포함되지 않음.
+- subtype ex) : image/gif, image/png, image/jpeg, image/bmp, image/webp
+### audio: 
+- subtype ex) : audio/midi, audio/mpeg, audio/webm, audio/ogg, audio/wav
+### video
+- subtype ex) : video/webm, video/ogg
+### application
+- subtype ex) : application/octet-stream, application/pkcs12, application/vnd.mspowerpoint, application/xhtml+xml, application/xml, application/pdf
+
+
+## 멀티 파트 타입
+- 멀티파트 타입은 일반적으로 각기 다른 MIME 타입들로 개별적으로 나눌 수 있는 타입. 즉 합성된 문서를 나타내는 방법. 
+- html forms의 post 메소드에 사용되는 "multipart/form-data"와 
+전체 문서의 하위 집합만 전송하기 위한 206 Partial Content 상태 메시지와 함께 사용되는 multipart/byteranges를 제외하고는 http가 멀티 파트 문서를 다룰 수 있는 방법은 없음.  
+
+
+- subtype ex) :  multipart/mixed, multipart/digest, multipart/alternative, multipart/related, multipart/report, multipart/signed, multipart/encrypted
+
+## 주요 MIME 타입
+### application/octet-stream 
+- 이진타입을 위한 기본 값
+- 잘 알려지지 않은 이진 파일을 의미. 브라우저는 보통 자동으로 실행하지 않거나 자동 실행할 지 묻기도 함. Content-Disposition 헤더가 값 attachment와 함께 설정되었고 'Save As' 파일을 제한하는지 여부에 따라 브라우저가 그것을 다루게 됨.
+### text/plain 
+- 텍스트 파일에 대한 기본값.
+- 실제로 알려지지 않은 텍스트 파일일지라도 브라우저들은 그것을 디스플레이 할 수 있다고 가정함. 
+### text/css 
+- 웹페이지 내에서 보통 인터프리터 되어야 하는 모든 CSS 파일들은 text/css 파일이 되어야함. 
+### text/html
+- 모든 html 컨텐츠는 이 타입과 함께 서브되어야 함.
+
+### multipart/form-data
+
+- multipart/form-data is **one of the value of enctype attribute**, which is used in form element that have a file upload. multi-part means form data divides into multiple parts and send to server.
+
+- html form의 내용을 전송 시 사용. 멀티 파트 문서 형식으로 경계가 구분되어지는 다른 파트들로 구성됨. 각 파트는 그 자체로 개체이며 자신만의 HTTP 헤더를 가짐. 파일 업로드 필드를 위한 헤더로 Content-Dispositionk 그리고 가장 일반적인 것 으로 Content-Type을 가짐.
+
+### enctype attribute ?
+- 이 속성은 \<form\>요소의 method 속성값이 post인 경우에만 사용.
+- enctype(인코드 타입) 속성은 서버로 데이터가 보내지기 전에 어떻게 인코딩이 되어야하는지 명시해주는 속성이다.
+- 기본값은  "application/x-www-form-urlencoded". 공백은 "+" 로, 특수 문자는 아스키코드로 변환되어 인코딩된다.  
+<br/> --> (key=value&key=value 형태로 전송되며, 영숫자가 아닌 문자는 퍼센트 기호 및 문자의 ASCII 코드를 나타내는 두 개의 16 진수로 변환됨. 우리가 전송하려는 데이터가 영숫자가 아닌 경우 3바이트로 표현하기 때문에 바이너리 파일을 전송할 경우 페이로드를 3배로 만들기에 무척 비효율적)
+- "multipart/form-data". 모든 문자를 인코딩하지 않음. 파일이나 이미지를 서버에 전송할 때 주로 사용.
+<br/> --> (바이너리 데이터를 효율적으로 전송할 수 있으나 웹에서 많이 사용되는 텍스트로만 이루어진 POST 전송은 오히려 MIME 헤더가 추가되기 때문에 오버 헤드가 발생됨)
+- "text/plain". 공백문자는 "+" 로 변환되지만, 나머지 문자는 모두 인코딩 되지 않음.
+<br/><br/>
+
 ### Switch-case
 - 조건문 체크 : single integer, 상수화된 값, 스트링 객체를 테스트
 - 이상적인 상황 : 고정된 데이터 값이 있는 경우
